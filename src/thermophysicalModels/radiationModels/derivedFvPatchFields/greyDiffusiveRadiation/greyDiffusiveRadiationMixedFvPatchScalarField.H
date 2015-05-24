@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2013 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -38,7 +38,7 @@ Description
     \table
         Property     | Description             | Required    | Default value
         T            | temperature field name  | no          | T
-        emissivityMode | emissivity mode: solidThermo or lookup | yes |
+        emissivityMode | emissivity mode: solidRadiation or lookup | yes |
     \endtable
 
     Example of the boundary condition specification:
@@ -47,15 +47,15 @@ Description
     {
         type            greyDiffusiveRadiation;
         T               T;
-        emissivityMode  solidThermo;
+        emissivityMode  solidRadiation;
         value           uniform 0;
     }
     \endverbatim
 
 SeeAlso
+    Foam::radiationCoupledBase
     Foam::radiation::radiationModel
     Foam::radiation::fvDOM
-    Foam::radiationCoupledBase
     Foam::mixedFvPatchField
 
 SourceFiles
@@ -191,8 +191,8 @@ public:
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+} // End namespace radiation
 } // End namespace Foam
-}
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
