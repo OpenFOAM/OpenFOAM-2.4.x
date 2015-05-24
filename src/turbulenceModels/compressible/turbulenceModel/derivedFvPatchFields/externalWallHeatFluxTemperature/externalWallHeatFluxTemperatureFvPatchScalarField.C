@@ -98,7 +98,7 @@ externalWallHeatFluxTemperatureFvPatchScalarField
     Ta_(ptf.Ta_, mapper),
     QrPrevious_(ptf.QrPrevious_, mapper),
     QrRelaxation_(ptf.QrRelaxation_),
-    QrName_(ptf.QrName_)
+    QrName_(ptf.QrName_),
     thicknessLayers_(ptf.thicknessLayers_),
     kappaLayers_(ptf.kappaLayers_)
 {}
@@ -195,8 +195,8 @@ externalWallHeatFluxTemperatureFvPatchScalarField
     q_(tppsf.q_),
     h_(tppsf.h_),
     Ta_(tppsf.Ta_),
-    QrPrevious_(ptf.QrPrevious_),
-    QrRelaxation_(ptf.QrRelaxation_),
+    QrPrevious_(tppsf.QrPrevious_),
+    QrRelaxation_(tppsf.QrRelaxation_),
     QrName_(tppsf.QrName_),
     thicknessLayers_(tppsf.thicknessLayers_),
     kappaLayers_(tppsf.kappaLayers_)
@@ -216,8 +216,8 @@ externalWallHeatFluxTemperatureFvPatchScalarField
     q_(tppsf.q_),
     h_(tppsf.h_),
     Ta_(tppsf.Ta_),
-    QrPrevious_(ptf.QrPrevious_),
-    QrRelaxation_(ptf.QrRelaxation_),
+    QrPrevious_(tppsf.QrPrevious_),
+    QrRelaxation_(tppsf.QrRelaxation_),
     QrName_(tppsf.QrName_),
     thicknessLayers_(tppsf.thicknessLayers_),
     kappaLayers_(tppsf.kappaLayers_)
