@@ -13,15 +13,15 @@
         )
     );
 
-    word contiuousPhaseName(transportProperties.lookup("contiuousPhaseName"));
+    word continuousPhaseName(transportProperties.lookup("contiuousPhaseName"));
 
     dimensionedScalar rhocValue
     (
-        IOobject::groupName("rho", contiuousPhaseName),
+        IOobject::groupName("rho", continuousPhaseName),
         dimDensity,
         transportProperties.lookup
         (
-            IOobject::groupName("rho", contiuousPhaseName)
+            IOobject::groupName("rho", continuousPhaseName)
         )
     );
 
@@ -44,7 +44,7 @@
     (
         IOobject
         (
-            IOobject::groupName("U", contiuousPhaseName),
+            IOobject::groupName("U", continuousPhaseName),
             runTime.timeName(),
             mesh,
             IOobject::MUST_READ,
@@ -75,7 +75,7 @@
     (
         IOobject
         (
-            IOobject::groupName("phi", contiuousPhaseName),
+            IOobject::groupName("phi", continuousPhaseName),
             runTime.timeName(),
             mesh,
             IOobject::READ_IF_PRESENT,
@@ -96,7 +96,7 @@
     (
         IOobject
         (
-            IOobject::groupName("mu", contiuousPhaseName),
+            IOobject::groupName("mu", continuousPhaseName),
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
@@ -112,7 +112,7 @@
     (
         IOobject
         (
-            IOobject::groupName("alpha", contiuousPhaseName),
+            IOobject::groupName("alpha", continuousPhaseName),
             runTime.timeName(),
             mesh,
             IOobject::READ_IF_PRESENT,
