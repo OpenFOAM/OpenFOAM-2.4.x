@@ -13,7 +13,7 @@
         )
     );
 
-    word continuousPhaseName(transportProperties.lookup("contiuousPhaseName"));
+    word continuousPhaseName(transportProperties.lookup("continuousPhaseName"));
 
     dimensionedScalar rhocValue
     (
