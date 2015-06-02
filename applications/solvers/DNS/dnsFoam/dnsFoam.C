@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 
         // --- PISO loop
 
-        for (int corr=1; corr<=1; corr++)
+        for (int corr=0; corr<nCorr; corr++)
         {
             volScalarField rAU(1.0/UEqn.A());
             surfaceScalarField rAUf("rAUf", fvc::interpolate(rAU));
