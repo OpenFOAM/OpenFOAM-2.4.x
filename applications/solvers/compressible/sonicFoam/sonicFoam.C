@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
-        #include "readTimeControls.H"
         #include "compressibleCourantNo.H"
 
         #include "rhoEqn.H"
