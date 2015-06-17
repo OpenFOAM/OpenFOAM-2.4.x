@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -85,7 +85,7 @@ public:
         );
 
         //- Construct by mapping given mixedFixedValueSlipFvPatchField
-        //- onto a new patch
+        //- Onto a new patch
         mixedFixedValueSlipFvPatchField
         (
             const mixedFixedValueSlipFvPatchField<Type>&,
@@ -217,7 +217,7 @@ public:
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #ifdef NoRepository
-#   include "mixedFixedValueSlipFvPatchField.C"
+    #include "mixedFixedValueSlipFvPatchField.C"
 #endif
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
