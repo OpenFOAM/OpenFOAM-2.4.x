@@ -1,3 +1,0 @@
-PFLAGS     = -DMPICH_SKIP_MPICXX
-PINC       =
-PLIBS      = -lscmpi
