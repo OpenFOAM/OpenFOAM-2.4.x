@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2013 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -22,8 +22,13 @@ License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
 Application
+    Test-List
 
 Description
+    Simple tests and examples of use of List
+
+See Also
+    Foam::List
 
 \*---------------------------------------------------------------------------*/
 
@@ -54,7 +59,7 @@ int main(int argc, char *argv[])
     argList::addOption("float", "xx");
     argList::addBoolOption("flag");
 
-#   include "setRootCase.H"
+    #include "setRootCase.H"
 
     List<vector> list1(IStringStream("1 ((0 1 2))")());
     Info<< "list1: " << list1 << endl;
@@ -75,6 +80,14 @@ int main(int argc, char *argv[])
     Info<< "list2: " << list2 << nl
         << "list3: " << list3 << endl;
 
+    List<vector> list4(IStringStream("((0 1 2) (3 4 5) (6 7 8))")());
+    List<vector> list5(IStringStream("((5 3 1) (10 2 2) (8 1 0))")());
+    Info<< "list4: " << list4 << nl
+        << "list5: " << list5 << endl;
+    list4.swap(list5);
+    Info<< "Swapped via the swap() method" << endl;
+    Info<< "list4: " << list4 << nl
+        << "list5: " << list5 << endl;
 
     // Subset
     const labelList map(IStringStream("2 (0 2)")());

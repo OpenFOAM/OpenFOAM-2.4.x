@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -37,12 +37,16 @@ Description
 // Element access looping using [] for vector machines
 
 #define List_FOR_ALL(f, i)                      \
-        register const label _n##i = (f).size();\
-        for (register label i=0; i<_n##i; i++)  \
+        const label _n##i = (f).size();\
+        for (label i=0; i<_n##i; i++)  \
         {
 
 #define List_END_FOR_ALL  }
 
+// Provide current element
+#define List_CELEM(f, fp, i)  (fp[i])
+
+// Provide current element
 #define List_ELEM(f, fp, i)  (fp[i])
 
 #define List_ACCESS(type, f, fp) \
@@ -56,19 +60,23 @@ Description
 // Pointer looping for scalar machines
 
 #define List_FOR_ALL(f, i)                      \
-        register label i = (f).size();          \
+        label i = (f).size();          \
         while (i--)                             \
         {                                       \
 
 #define List_END_FOR_ALL  }
 
+// Provide current element without incrementing pointer
+#define List_CELEM(f, fp, i)  (*fp)
+
+// Provide current element and increment pointer
 #define List_ELEM(f, fp, i)  (*fp++)
 
 #define List_ACCESS(type, f, fp) \
-    register type* __restrict__ fp = (f).begin()
+    type* __restrict__ fp = (f).begin()
 
 #define List_CONST_ACCESS(type, f, fp) \
-    register const type* __restrict__ fp = (f).begin()
+    const type* __restrict__ fp = (f).begin()
 
 #endif
 
