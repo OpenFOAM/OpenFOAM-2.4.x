@@ -54,8 +54,6 @@ class constantViscosity
 :
     public filmViscosityModel
 {
-private:
-
     // Private member functions
 
         //- Disallow default bitwise copy construct
@@ -70,7 +68,7 @@ protected:
     // Protected data
 
         //- Constant viscosity [Pa.s]
-        scalar mu0_;
+        dimensionedScalar mu0_;
 
 
 
