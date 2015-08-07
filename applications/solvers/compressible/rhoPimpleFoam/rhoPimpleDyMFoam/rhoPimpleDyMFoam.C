@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     #include "createFvOptions.H"
     #include "createPcorrTypes.H"
     #include "createRhoUf.H"
-    #include "CourantNo.H"
+    #include "compressibleCourantNo.H"
     #include "setInitialDeltaT.H"
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
