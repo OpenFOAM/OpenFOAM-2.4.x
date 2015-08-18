@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2012-2013 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2012-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -25,6 +25,8 @@ License
 
 #include "fvMesh.H"
 #include "fvcGrad.H"
+
+// * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * //
 
 template<class Type>
 Foam::GeometricField
@@ -73,8 +75,6 @@ Foam::calcFvcGrad::gradField(const word& gradName, const dimensionSet& dims)
 }
 
 
-// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-
 template<class Type>
 void Foam::calcFvcGrad::calcGrad
 (
@@ -98,7 +98,8 @@ void Foam::calcFvcGrad::calcGrad
 
         vfGradType& field = gradField<Type>(resultName, vf.dimensions());
 
-        field = fvc::grad(vf);
+        // De-reference the tmp to avoid a clash with the cached grad field
+        field = fvc::grad(vf)();
 
         processed = true;
     }
@@ -108,7 +109,8 @@ void Foam::calcFvcGrad::calcGrad
 
         vfGradType& field = gradField<Type>(resultName, sf.dimensions());
 
-        field = fvc::grad(sf);
+        // De-reference the tmp to avoid a clash with the cached grad field
+        field = fvc::grad(sf)();
 
         processed = true;
     }
