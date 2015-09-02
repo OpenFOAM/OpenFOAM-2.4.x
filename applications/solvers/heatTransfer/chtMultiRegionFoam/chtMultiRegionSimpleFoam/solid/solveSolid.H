@@ -5,8 +5,8 @@
         (
             (
                 thermo.isotropic()
-                ? -fvm::laplacian(betav*thermo.alpha(), h, "laplacian(alpha,h)")
-                : -fvm::laplacian(betav*taniAlpha(), h, "laplacian(alpha,h)")
+              ? -fvm::laplacian(betav*thermo.alpha(), h, "laplacian(alpha,h)")
+              : -fvm::laplacian(betav*taniAlpha(), h, "laplacian(alpha,h)")
             )
           ==
             fvOptions(rho, h)
@@ -24,4 +24,5 @@
 
 thermo.correct();
 
-Info<< "Min/max T:" << min(thermo.T()) << ' ' << max(thermo.T()) << endl;
+Info<< "Min/max T:" << min(thermo.T()).value() << ' '
+    << max(thermo.T()).value() << endl;
