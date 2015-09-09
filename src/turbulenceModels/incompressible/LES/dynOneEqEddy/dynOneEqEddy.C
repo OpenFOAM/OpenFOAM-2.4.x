@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2013 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -133,7 +133,8 @@ dynOneEqEddy::dynOneEqEddy
 {
     bound(k_, kMin_);
 
-    const volScalarField KK(0.5*(filter_(magSqr(U)) - magSqr(filter_(U))));
+    volScalarField KK(0.5*(filter_(magSqr(U)) - magSqr(filter_(U))));
+    KK.max(dimensionedScalar("small", KK.dimensions(), SMALL));
     updateSubGridScaleFields(symm(fvc::grad(U)), KK);
 
     printCoeffs();
