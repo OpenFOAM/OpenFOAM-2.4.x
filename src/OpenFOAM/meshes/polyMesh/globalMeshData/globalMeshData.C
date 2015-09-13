@@ -2746,22 +2746,44 @@ void Foam::globalMeshData::updateMesh()
         Pout<< "globalMeshData : merge dist:" << tolDim << endl;
     }
 
+    // *** Temporary hack to avoid problems with overlapping communication
+    // *** between these reductions and the calculation of deltaCoeffs
+    label comm = UPstream::worldComm + 1;
+
     // Total number of faces.
-    nTotalFaces_ = returnReduce(mesh_.nFaces(), sumOp<label>());
+    nTotalFaces_ = returnReduce
+    (
+        mesh_.nFaces(),
+        sumOp<label>(),
+        Pstream::msgType(),
+        comm
+    );
 
     if (debug)
     {
         Pout<< "globalMeshData : nTotalFaces_:" << nTotalFaces_ << endl;
     }
 
-    nTotalCells_ = returnReduce(mesh_.nCells(), sumOp<label>());
+    nTotalCells_ = returnReduce
+    (
+        mesh_.nCells(),
+        sumOp<label>(),
+        Pstream::msgType(),
+        comm
+    );
 
     if (debug)
     {
         Pout<< "globalMeshData : nTotalCells_:" << nTotalCells_ << endl;
     }
 
-    nTotalPoints_ = returnReduce(mesh_.nPoints(), sumOp<label>());
+    nTotalPoints_ = returnReduce
+    (
+        mesh_.nPoints(),
+        sumOp<label>(),
+        Pstream::msgType(),
+        comm
+    );
 
     if (debug)
     {
