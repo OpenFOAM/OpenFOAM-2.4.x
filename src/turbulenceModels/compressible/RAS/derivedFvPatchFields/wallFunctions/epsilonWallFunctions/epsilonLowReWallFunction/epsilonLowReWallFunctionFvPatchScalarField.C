@@ -98,15 +98,15 @@ void epsilonLowReWallFunctionFvPatchScalarField::calculate
 
         if (yPlus > yPlusLam_)
         {
-            epsilon[cellI] = w*Cmu75*pow(k[cellI], 1.5)/(kappa_*y[faceI]);
+            epsilon[cellI] += w*Cmu75*pow(k[cellI], 1.5)/(kappa_*y[faceI]);
         }
         else
         {
-            epsilon[cellI] =
+            epsilon[cellI] +=
                 w*2.0*k[cellI]*muw[faceI]/rhow[faceI]/sqr(y[faceI]);
         }
 
-        G[cellI] =
+        G[cellI] +=
             w
            *(mutw[faceI] + muw[faceI])
            *magGradUw[faceI]
