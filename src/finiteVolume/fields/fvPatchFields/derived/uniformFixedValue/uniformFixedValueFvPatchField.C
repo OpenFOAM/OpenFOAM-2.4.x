@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2014 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2015 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -25,15 +25,10 @@ License
 
 #include "uniformFixedValueFvPatchField.H"
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-namespace Foam
-{
-
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const fvPatch& p,
     const DimensionedField<Type, volMesh>& iF
@@ -45,7 +40,7 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const fvPatch& p,
     const DimensionedField<Type, volMesh>& iF,
@@ -58,7 +53,7 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const uniformFixedValueFvPatchField<Type>& ptf,
     const fvPatch& p,
@@ -76,7 +71,7 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const fvPatch& p,
     const DimensionedField<Type, volMesh>& iF,
@@ -86,20 +81,13 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
     fixedValueFvPatchField<Type>(p, iF),
     uniformValue_(DataEntry<Type>::New("uniformValue", dict))
 {
-    if (dict.found("value"))
-    {
-        fvPatchField<Type>::operator==(Field<Type>("value", dict, p.size()));
-    }
-    else
-    {
-        const scalar t = this->db().time().timeOutputValue();
-        fvPatchField<Type>::operator==(uniformValue_->value(t));
-    }
+    const scalar t = this->db().time().timeOutputValue();
+    fvPatchField<Type>::operator==(uniformValue_->value(t));
 }
 
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const uniformFixedValueFvPatchField<Type>& ptf
 )
@@ -115,7 +103,7 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 
 
 template<class Type>
-uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
+Foam::uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 (
     const uniformFixedValueFvPatchField<Type>& ptf,
     const DimensionedField<Type, volMesh>& iF
@@ -142,7 +130,7 @@ uniformFixedValueFvPatchField<Type>::uniformFixedValueFvPatchField
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
 template<class Type>
-void uniformFixedValueFvPatchField<Type>::updateCoeffs()
+void Foam::uniformFixedValueFvPatchField<Type>::updateCoeffs()
 {
     if (this->updated())
     {
@@ -157,16 +145,12 @@ void uniformFixedValueFvPatchField<Type>::updateCoeffs()
 
 
 template<class Type>
-void uniformFixedValueFvPatchField<Type>::write(Ostream& os) const
+void Foam::uniformFixedValueFvPatchField<Type>::write(Ostream& os) const
 {
-    // Note: do not write value
     fvPatchField<Type>::write(os);
     uniformValue_->writeData(os);
+    this->writeEntry("value", os);
 }
 
-
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-} // End namespace Foam
 
 // ************************************************************************* //
