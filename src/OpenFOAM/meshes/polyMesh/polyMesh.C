@@ -1478,7 +1478,11 @@ Foam::label Foam::polyMesh::findCell
     const cellRepresentation decompMode
 ) const
 {
-    if (Pstream::parRun() && decompMode == FACEDIAGTETS)
+    if
+    (
+        Pstream::parRun()
+     && (decompMode == FACEDIAGTETS || decompMode == CELL_TETS)
+    )
     {
         // Force construction of face-diagonal decomposition before testing
         // for zero cells. If parallel running a local domain might have zero
@@ -1500,8 +1504,10 @@ Foam::label Foam::polyMesh::findCell
     {
         return cellI;
     }
-    else // point is not in the nearest cell so search all cells
+    else
     {
+        // point is not in the nearest cell so search all cells
+
         for (label cellI = 0; cellI < nCells(); cellI++)
         {
             if (pointInCell(location, cellI, decompMode))
@@ -1509,6 +1515,7 @@ Foam::label Foam::polyMesh::findCell
                 return cellI;
             }
         }
+
         return -1;
     }
 }
